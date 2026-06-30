@@ -460,15 +460,30 @@
     var LOCK_KEY = "mirva_quote_submitted";
     function hasSubmitted() { try { return localStorage.getItem(LOCK_KEY) === "1"; } catch (err) { return false; } }
     function lockForm(msg) {
-      try { localStorage.setItem(LOCK_KEY, "1"); } catch (err) {}
+      try { localStorage.setItem(LOCK_KEY, "1"); localStorage.removeItem("mirva_quote_draft"); } catch (err) {}
       form.querySelectorAll("input, select, textarea, button").forEach(function (f) { f.disabled = true; });
       btn.classList.remove("loading");
       setStatus(msg, "success");
     }
+    var DRAFT_KEY = "mirva_quote_draft";
+    var fields = form.querySelectorAll("input, select, textarea");
+    function saveDraft() {
+      var data = {};
+      fields.forEach(function (f) { if (f.name) data[f.name] = f.value; });
+      try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (err) {}
+    }
+    function restoreDraft() {
+      var data;
+      try { data = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}"); } catch (err) { return; }
+      fields.forEach(function (f) { if (f.name && data[f.name] != null) f.value = data[f.name]; });
+    }
+    function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (err) {} }
+
     if (hasSubmitted()) { lockForm("You've already sent us a request from this device — we'll be in touch soon!"); }
-    form.querySelectorAll("input, select, textarea").forEach(function (f) {
-      f.addEventListener("input", function () { f.classList.remove("invalid"); });
-      f.addEventListener("change", function () { f.classList.remove("invalid"); });
+    else { restoreDraft(); }
+    fields.forEach(function (f) {
+      f.addEventListener("input", function () { f.classList.remove("invalid"); saveDraft(); });
+      f.addEventListener("change", function () { f.classList.remove("invalid"); saveDraft(); });
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault(); setStatus("", "");
