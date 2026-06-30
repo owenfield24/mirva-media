@@ -167,9 +167,7 @@
     .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     label { font-family: var(--display); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
-    label .req { color: var(--cyan); margin-left: 4px; font-weight: 700; }
-    .req-note { font-size: 0.82rem; color: var(--ink-mute); margin: 0 0 4px; }
-    .req-note .req { color: var(--cyan); font-weight: 700; }
+    label .req { color: #ff5a5a; margin-left: 4px; font-weight: 700; }
     input, select, textarea { font-family: var(--body); font-size: 1rem; color: var(--ink); background: rgba(7,11,22,0.6);
       border: 1px solid var(--line-strong); border-radius: 12px; padding: 13px 15px; width: 100%; transition: border-color 0.25s, box-shadow 0.25s; resize: vertical; }
     input::placeholder, textarea::placeholder { color: var(--ink-mute); }
@@ -215,7 +213,7 @@
 
   <nav>
     <div class="wrap nav-inner">
-      <a href="#top" class="brand" aria-label="Mirva Media"><img src="MIRVA-Logo-transparent.png" alt="Mirva Media" /></a>
+      <a href="#top" class="brand" aria-label="Mirva Media" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });"><img src="MIRVA-Logo-transparent.png" alt="Mirva Media" /></a>
       <a href="#quote" class="nav-cta magnetic">Get a quote</a>
     </div>
   </nav>
@@ -324,7 +322,6 @@
 
         <!-- Quote form posts live to Formspree. -->
         <form class="quote-panel reveal" id="quoteForm" action="https://formspree.io/f/xwvdnppg" method="POST" novalidate>
-          <p class="req-note"><span class="req">*</span> Required</p>
           <div class="row">
             <div class="field">
               <label for="name">Name<span class="req">*</span></label>
