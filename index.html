@@ -55,12 +55,6 @@
     @keyframes float1 { to { transform: translate(120px, 80px) scale(1.15); } }
     @keyframes float2 { to { transform: translate(-100px, 60px) scale(1.1); } }
 
-    /* cursor-following light */
-    .cursor-light { position: fixed; top: 0; left: 0; width: 460px; height: 460px; z-index: -2; pointer-events: none;
-      margin: -230px 0 0 -230px; border-radius: 50%; opacity: 0; transition: opacity 0.5s;
-      background: radial-gradient(circle, rgba(91,140,255,0.12) 0%, transparent 65%);
-      transform: translate3d(var(--mx, 50vw), var(--my, 30vh), 0); }
-
     .grid-overlay { position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.4;
       background-image: linear-gradient(rgba(140,170,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(140,170,255,0.045) 1px, transparent 1px);
       background-size: 64px 64px;
@@ -212,7 +206,6 @@
   </defs></svg>
 
   <div class="bg" aria-hidden="true"><span class="glow a"></span><span class="glow b"></span></div>
-  <div class="cursor-light" id="cursorLight" aria-hidden="true"></div>
   <div class="grid-overlay" aria-hidden="true"></div>
   <div class="floor" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
@@ -429,15 +422,6 @@
     });
 
     if (fine) {
-      /* cursor-following light */
-      var light = document.getElementById("cursorLight");
-      var tx = window.innerWidth/2, ty = window.innerHeight/2, cx = tx, cy = ty, lit = false;
-      window.addEventListener("mousemove", function (e) {
-        tx = e.clientX; ty = e.clientY;
-        if (!lit) { light.style.opacity = "1"; lit = true; }
-      }, { passive: true });
-      (function loop(){ cx += (tx-cx)*0.12; cy += (ty-cy)*0.12; light.style.setProperty("--mx", cx+"px"); light.style.setProperty("--my", cy+"px"); requestAnimationFrame(loop); })();
-
       /* magnetic buttons */
       document.querySelectorAll(".magnetic").forEach(function (el) {
         var strength = 0.32;
