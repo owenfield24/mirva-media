@@ -457,11 +457,10 @@
     var endpoint = form.getAttribute("action") || "";
     var demo = endpoint.indexOf("YOUR_FORM_ID") !== -1;
     function setStatus(msg, type) { statusEl.textContent = msg; statusEl.className = "status" + (type ? " " + type : ""); }
-    var LOCK_KEY = "mirva_quote_submitted";
-    function hasSubmitted() { try { return localStorage.getItem(LOCK_KEY) === "1"; } catch (err) { return false; } }
-    function lockForm(msg) {
-      try { localStorage.setItem(LOCK_KEY, "1"); localStorage.removeItem("mirva_quote_draft"); } catch (err) {}
-      form.querySelectorAll("input, select, textarea, button").forEach(function (f) { f.disabled = true; });
+    try { localStorage.removeItem("mirva_quote_submitted"); } catch (err) {}
+    function onSuccess(msg) {
+      clearDraft();
+      form.reset();
       btn.classList.remove("loading");
       setStatus(msg, "success");
     }
@@ -479,26 +478,24 @@
     }
     function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (err) {} }
 
-    if (hasSubmitted()) { lockForm("You've already sent us a request from this device — we'll be in touch soon!"); }
-    else { restoreDraft(); }
+    restoreDraft();
     fields.forEach(function (f) {
       f.addEventListener("input", function () { f.classList.remove("invalid"); saveDraft(); });
       f.addEventListener("change", function () { f.classList.remove("invalid"); saveDraft(); });
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault(); setStatus("", "");
-      if (hasSubmitted()) { lockForm("You've already sent us a request from this device — we'll be in touch soon!"); return; }
       var ok = true;
       form.querySelectorAll("[required]").forEach(function (f) {
         var valid = f.value && f.checkValidity(); f.classList.toggle("invalid", !valid); if (!valid) ok = false;
       });
       if (!ok) { setStatus("Please fill in the highlighted fields.", "error"); return; }
       if (demo) { btn.classList.add("loading");
-        setTimeout(function () { lockForm("Thanks! Received in demo mode — add your Formspree ID to receive emails."); }, 650); return; }
+        setTimeout(function () { onSuccess("Thanks! Received in demo mode — add your Formspree ID to receive emails."); }, 650); return; }
       btn.classList.add("loading");
       fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
         .then(function (res) { btn.classList.remove("loading");
-          if (res.ok) { lockForm("Thanks! We'll be in touch within one business day."); }
+          if (res.ok) { onSuccess("Thanks! We'll be in touch within one business day."); }
           else { setStatus("Something went wrong — please try again.", "error"); } })
         .catch(function () { btn.classList.remove("loading"); setStatus("Network error — please try again.", "error"); });
     });
