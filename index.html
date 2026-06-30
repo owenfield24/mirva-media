@@ -457,12 +457,37 @@
     var endpoint = form.getAttribute("action") || "";
     var demo = endpoint.indexOf("YOUR_FORM_ID") !== -1;
     function setStatus(msg, type) { statusEl.textContent = msg; statusEl.className = "status" + (type ? " " + type : ""); }
-    try { localStorage.removeItem("mirva_quote_submitted"); } catch (err) {}
-    function onSuccess(msg) {
-      clearDraft();
-      form.reset();
+
+    /* ── Owner unlock ───────────────────────────────────────────────
+       Your computer becomes "owner" (unlimited submissions) by visiting
+       the site ONCE with the secret link:  yoursite.com/?owner=PASSPHRASE
+       Change OWNER_PASS below to your own secret. Everyone else is
+       limited to one submission per device. */
+    var OWNER_PASS = "mirvaboss2026";
+    var OWNER_KEY = "mirva_owner";
+    var LOCK_KEY = "mirva_quote_submitted";
+    function isOwner() { try { return localStorage.getItem(OWNER_KEY) === "1"; } catch (err) { return false; } }
+    function hasSubmitted() { try { return localStorage.getItem(LOCK_KEY) === "1"; } catch (err) { return false; } }
+    (function () {
+      var m = location.search.match(/[?&]owner=([^&]+)/);
+      if (m && decodeURIComponent(m[1]) === OWNER_PASS) {
+        try { localStorage.setItem(OWNER_KEY, "1"); } catch (err) {}
+        if (history.replaceState) history.replaceState(null, "", location.pathname + location.hash);
+      }
+    })();
+    function lockForm(msg) {
+      form.querySelectorAll("input, select, textarea, button").forEach(function (f) { f.disabled = true; });
       btn.classList.remove("loading");
       setStatus(msg, "success");
+    }
+    function onSuccess(msg) {
+      clearDraft();
+      btn.classList.remove("loading");
+      if (isOwner()) { form.reset(); setStatus(msg, "success"); }
+      else {
+        try { localStorage.setItem(LOCK_KEY, "1"); } catch (err) {}
+        lockForm("Thanks! We've got your request — we'll be in touch soon.");
+      }
     }
     var DRAFT_KEY = "mirva_quote_draft";
     var fields = form.querySelectorAll("input, select, textarea");
@@ -478,13 +503,15 @@
     }
     function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (err) {} }
 
-    restoreDraft();
+    if (!isOwner() && hasSubmitted()) { lockForm("You've already sent us a request from this device — we'll be in touch soon!"); }
+    else { restoreDraft(); }
     fields.forEach(function (f) {
       f.addEventListener("input", function () { f.classList.remove("invalid"); saveDraft(); });
       f.addEventListener("change", function () { f.classList.remove("invalid"); saveDraft(); });
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault(); setStatus("", "");
+      if (!isOwner() && hasSubmitted()) { lockForm("You've already sent us a request from this device — we'll be in touch soon!"); return; }
       var ok = true;
       form.querySelectorAll("[required]").forEach(function (f) {
         var valid = f.value && f.checkValidity(); f.classList.toggle("invalid", !valid); if (!valid) ok = false;
