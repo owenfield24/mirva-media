@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Terms of Service — Mirva Media</title>
+  <meta name="theme-color" content="#0c1322" />
+  <link rel="icon" href="MIRVA-Logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c1322; --bg-deep: #070b16; --ink: #eaf0ff; --ink-soft: #9db0d6; --ink-mute: #5f7099;
+      --line: rgba(140,170,255,0.14); --line-strong: rgba(140,170,255,0.28);
+      --accent: #3147ff; --accent-bright: #5b73ff; --cyan: #34d9ff; --glass: rgba(255,255,255,0.035);
+      --display: "Space Grotesk", system-ui, sans-serif; --body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(120% 70% at 50% -10%, #131d38 0%, var(--bg) 45%, var(--bg-deep) 100%); }
+    .glow { position: fixed; z-index: -1; width: 540px; height: 540px; border-radius: 50%; filter: blur(120px); opacity: 0.3;
+      background: radial-gradient(circle, #2740ff 0%, transparent 70%); top: -120px; left: -160px; pointer-events: none; }
+    .wrap { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 28px; }
+
+    nav { position: sticky; top: 0; z-index: 50; padding: 16px 0;
+      background: rgba(12,11,10,0.55); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .brand img { height: 42px; width: auto; }
+    .back { font-family: var(--display); font-size: 0.88rem; font-weight: 500; color: var(--ink); padding: 9px 18px;
+      border: 1px solid var(--line-strong); border-radius: 100px; background: var(--glass); transition: border-color 0.3s, background 0.3s; }
+    .back:hover { border-color: var(--accent-bright); background: rgba(91,115,255,0.12); }
+
+    main { padding: 60px 0 90px; }
+    .banner { display: flex; gap: 12px; align-items: flex-start; border: 1px solid rgba(91,115,255,0.32);
+      background: rgba(91,115,255,0.08); border-radius: 14px; padding: 16px 20px; margin-bottom: 44px; font-size: 0.9rem; color: var(--ink-soft); }
+    .banner strong { color: var(--ink); font-family: var(--display); }
+    h1 { font-family: var(--display); font-weight: 600; font-size: clamp(2.1rem, 5vw, 3rem); letter-spacing: -0.02em; line-height: 1.05; }
+    .meta { color: var(--ink-mute); font-size: 0.9rem; margin: 14px 0 6px; }
+    .intro { color: var(--ink-soft); margin-bottom: 8px; }
+    h2 { font-family: var(--display); font-weight: 600; font-size: 1.45rem; letter-spacing: -0.01em; margin: 44px 0 12px; padding-top: 26px; border-top: 1px solid var(--line); }
+    h2.key { color: var(--cyan); }
+    p { color: var(--ink-soft); margin-bottom: 14px; }
+    ul { margin: 0 0 16px 0; padding-left: 22px; color: var(--ink-soft); }
+    li { margin-bottom: 8px; }
+    .callout { border: 1px solid var(--line-strong); background: var(--glass); border-radius: 14px; padding: 20px 22px; margin: 8px 0 16px; }
+    .callout p:last-child { margin-bottom: 0; }
+    .ph { color: var(--accent-bright); background: rgba(91,115,255,0.12); border-radius: 4px; padding: 0 5px; font-style: normal; white-space: nowrap; }
+    strong { color: var(--ink); }
+
+    footer { border-top: 1px solid var(--line); padding: 26px 0; }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--ink-mute); font-size: 0.85rem; }
+    .foot a:hover { color: var(--ink-soft); }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand" aria-label="Mirva Media"><img src="MIRVA-Logo-transparent.png" alt="Mirva Media" /></a>
+      <a href="index.html" class="back">← Back to site</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <div class="banner">
+        <span>⚠️</span>
+        <span><strong>Draft template — not yet legal advice.</strong> Please have a qualified attorney review and complete this before you rely on it. Every <span class="ph">[BRACKETED]</span> item needs to be filled in or confirmed.</span>
+      </div>
+
+      <h1>Terms of Service</h1>
+      <p class="meta">Last updated: <span class="ph">[DATE]</span> · Effective: <span class="ph">[DATE]</span></p>
+      <p class="intro">These Terms govern the services provided by <span class="ph">[LEGAL ENTITY NAME]</span> ("Mirva Media", "we", "us", or "our") and your use of this website. By engaging us or using this site, you agree to these Terms. If you don't agree, please don't use our services or this site.</p>
+
+      <h2>1. What we do</h2>
+      <p>Mirva Media is a social media studio. We help brands with social media marketing — including content and short-form video, video ideas and concepts, profile and positioning strategy, and related guidance. The specific scope, deliverables, and fees for your engagement will be set out in a separate written agreement or proposal.</p>
+
+      <h2 class="key">2. No guarantee of results</h2>
+      <div class="callout">
+        <p>Social media performance depends on many factors that are <strong>outside our control</strong> — platform algorithms, audience behaviour, trends, competition, your product or offer, pricing, timing, and more.</p>
+        <p>Because of this, <strong>we do not and cannot guarantee any specific results</strong>, including (without limitation) views, impressions, reach, follower growth, engagement, leads, sales, conversions, or return on investment.</p>
+        <p>What we <strong>do</strong> promise is our best effort: we'll apply our experience, our process, and our AI-informed approach to give your content the strongest formatting and the best chance to perform. Any examples, past performance, projections, or estimates we share are <strong>illustrative only</strong> and are not a promise of future results.</p>
+      </div>
+
+      <h2>3. About our use of AI</h2>
+      <p>We use AI tools to help analyse trends, timing, formats, and other data points that inform our recommendations and content. AI outputs are <strong>guidance, not certainties</strong> — they inform our work but do not guarantee outcomes, and our team reviews the work we deliver.</p>
+
+      <h2>4. Your responsibilities</h2>
+      <ul>
+        <li>Provide timely access, approvals, brand assets, and accurate information so we can do the work.</li>
+        <li>You remain the owner of your social accounts and are responsible for complying with each platform's terms and applicable laws.</li>
+        <li>You're responsible for the accuracy and legality of any materials, claims, or products you ask us to promote.</li>
+      </ul>
+
+      <h2>5. Quotes, fees &amp; payment</h2>
+      <p>Any quote or estimate we provide is an estimate only and is not a binding offer. No engagement begins until a separate written agreement is in place. Fees, billing, and payment terms will be set out there. <span class="ph">[CONFIRM payment terms with your attorney.]</span></p>
+
+      <h2>6. Intellectual property</h2>
+      <p>Ownership of deliverables and any licence granted to you will be defined in your engagement agreement (typically, ownership transfers once fees are paid in full). The Mirva Media name, logo, and this website remain our property. <span class="ph">[CONFIRM IP and ownership terms.]</span></p>
+
+      <h2>7. Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, Mirva Media will not be liable for any indirect, incidental, special, or consequential damages, or for lost profits, revenue, data, or business, arising from our services or your use of this site. <span class="ph">[Attorney to set the liability cap and any carve-outs for your jurisdiction.]</span></p>
+
+      <h2>8. Termination &amp; changes</h2>
+      <p>Either party may end an engagement as described in the engagement agreement. We may update these Terms from time to time; the "Last updated" date will reflect any changes, and continued use means you accept the revised Terms.</p>
+
+      <h2>9. Governing law &amp; contact</h2>
+      <p>These Terms are governed by the laws of <span class="ph">[STATE / COUNTRY]</span>, without regard to conflict-of-law principles. Questions about these Terms can be sent to <span class="ph">[CONTACT EMAIL]</span>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© <span id="year"></span> Mirva Media</span>
+      <a href="index.html">Back to home</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
